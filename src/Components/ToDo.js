@@ -19,12 +19,22 @@ class ToDo extends Component {
     }
     //handling adding to a list stored in the state. 
     addToList = () => {
-        console.log("adding")
-        this.setState({
-            item: '',
-            list: [...this.state.list, this.state.item]
-        })
-        return;
+        //added blank field stopper. space char overrides the check. 
+        if (this.state.item != '') {
+            this.setState({
+                item: '',
+                list: [...this.state.list, this.state.item]
+            })
+            return;
+        }
+    }
+
+    //enter key functionality: 
+    enterPressed = (e) => {
+        if (e.key === "Enter") {
+            this.addToList(); 
+        }
+        
     }
 
     render() {
@@ -36,7 +46,8 @@ class ToDo extends Component {
                 return (
                     <ItemCard
                     item={item}
-                    index={index}
+                        index={index}
+                        key={index}
                     />
                 )
             }
@@ -45,20 +56,28 @@ class ToDo extends Component {
      
         return (
           <div>
-            <input
-              placeholder={this.state.placeholder}
-              onChange={(e) => this.inputHandler(e)}
-              value={this.state.item}
+                <input
+                    placeholder={this.state.placeholder}
+                    onChange={(e) => this.inputHandler(e)}
+                    value={this.state.item}
+                    onKeyPress={this.enterPressed}
             />
+                <button
+                    onClick={() => this.addToList()}>
+                    Add to List
+                    </button>
 
-            <button onClick={() => this.addToList()}> Add to List</button>
-            <button onClick={() => console.log(this.state.list)}>
-              Console Log the list:{" "}
-            </button>
+                <button
+                    onClick={() => console.log(this.state.list)}>
+                    Console Log the list:
+                </button>
             <p> To Do List: </p>
-            <div>
-              <ul>{mappingItems}</ul>
-            </div>
+            
+                <div>
+              
+                    <ul>{mappingItems}</ul>
+            
+                </div>
           </div>
         );
   }
