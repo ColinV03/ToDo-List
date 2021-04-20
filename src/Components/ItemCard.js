@@ -3,10 +3,15 @@ import React from 'react';
 
 export default function ItemCard(props) {
     //destructuring the props object to pass through the component: "Item"
-    const { item } = props;
+    const { item, index, deleteItem, list} = props;
+    let deleteFunction = () => {
+       deleteItem(index, list)
+   }
+
     return (
         <li>
-            <div>{item}</div>
+           
+           {item} <button onClick={deleteFunction}>X</button>
         </li>
     )
     
