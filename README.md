@@ -1,3 +1,11 @@
+# The Todo App: 
+This project is the result of hard work and comprised of both functional(presentational) and class based(stateful) components. The app has input functionality, along with being able to check things off of your list, by doing it all one thing at a time! Now, time to check this project off! 
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
