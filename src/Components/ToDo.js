@@ -111,7 +111,9 @@ class ToDo extends Component {
             <div>
               <h4> Here's your list:</h4>
               <ul>
-                {list == 0 ? "YOURE DOING GREAT, NOTHING HERE!" : mappingItems}
+                {list.length == 0 && completed.length >= 1
+                  ? "YOURE DOING GREAT, NOTHING HERE!"
+                  : mappingItems}
               </ul>
             </div>
             <div>
