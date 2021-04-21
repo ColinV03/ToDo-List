@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ItemCard from "./ItemCard"
+import Completed from "./Completed"
 
 class ToDo extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class ToDo extends Component {
         item: "",
         list: [],
         placeholder: "Add New Item",
+        completed: [],
       };
    
     }
@@ -31,13 +33,14 @@ class ToDo extends Component {
     }
 
 
-    deleteItem =(index, list) =>{
-        let copiedList = [...list]   
-        copiedList.splice(index, 1)
+    deleteItem = (index, list) => {
+        let copiedList = [...list];   
+        let completedItem = copiedList.splice(index, 1);       
         this.setState({
-            list: [...copiedList]
+            list: [...copiedList],
+            completed: [...this.state.completed, completedItem]
         })
-        console.log(`Delete pressed on ${index} + ${list} and the new list is: ${copiedList}`);
+        console.log(`Delete pressed on ${index} + ${list} and the new list is: ${copiedList} the completed item is `);
             
         }
 
@@ -61,21 +64,33 @@ class ToDo extends Component {
     render() {
 
         //  Adding Function for displaying array of items previously added: 
-        const { list } = this.state;
+        const { list, completed } = this.state;
         const mappingItems = 
-            list.map((item, index) => {
-                return (
-                    <ItemCard
-                        item={item}
-                        index={index}
-                        key={index}
-                        deleteItem={this.deleteItem}
-                        list={list}
-                    />
-                )
-            }
-            
-            )
+         list.map((item, index) => {
+             return (
+                 <ItemCard
+                     item={item}
+                     index={index}
+                     key={index}
+                     deleteItem={this.deleteItem}
+                     list={list}
+                 />
+             )
+         }
+         
+         )
+         const mapCompleted = completed.map((item, index) => {
+           return (
+             <Completed
+               item={item}
+               index={index}
+               key={index}
+             />
+           );
+         });
+        
+        
+        
      
         return (
           <div>
@@ -95,7 +110,13 @@ class ToDo extends Component {
             </form>
             <div>
               <h4> Here's your list:</h4>
-              <ul>{mappingItems}</ul>
+              <ul>
+                {list == 0 ? "YOURE DOING GREAT, NOTHING HERE!" : mappingItems}
+              </ul>
+            </div>
+            <div>
+              <h5> Look at you go!</h5>
+              <ul>{mapCompleted}</ul>
             </div>
           </div>
         );
