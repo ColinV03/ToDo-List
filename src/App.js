@@ -1,5 +1,10 @@
 import './App.css';
 import ToDo from "./Components/ToDo"
+import firebase from 'firebase';
+import firebaseConfig from './Components/Firebase';
+
+
+firebase.initializeApp(firebaseConfig);
 
 function App() {
   return (
